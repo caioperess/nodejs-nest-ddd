@@ -1,0 +1,35 @@
+{
+	"compilerOptions": {
+		"lib": ["ES2024"],
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"resolvePackageJsonExports": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"declaration": true,
+		"removeComments": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "ES2024",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"rootDir": "./",
+		"incremental": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": false,
+		"strictBindCallApply": false,
+		"noFallthroughCasesInSwitch": false,
+
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@test/*": ["./test/*"]
+		},
+
+		"types": ["vitest/globals"]
+	}
+}
