@@ -1,7 +1,8 @@
 import { type Either, left, right } from '@/core/either'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import type { AnswersRepository } from '../repositories/answers-repository'
+import { Injectable } from '@nestjs/common'
+import { AnswersRepository } from '../repositories/answers-repository'
 
 interface DeleteAnswerUseCaseParams {
 	answerId: string
@@ -10,8 +11,9 @@ interface DeleteAnswerUseCaseParams {
 
 type DeleteAnswerUseCaseResponse = Either<ResourceNotFoundError | NotAllowedError, object>
 
+@Injectable()
 export class DeleteAnswerUseCase {
-	constructor(private answersRepository: AnswersRepository) {}
+	constructor(private readonly answersRepository: AnswersRepository) {}
 
 	async execute({ answerId, authorId }: DeleteAnswerUseCaseParams): Promise<DeleteAnswerUseCaseResponse> {
 		const answer = await this.answersRepository.findById(answerId)

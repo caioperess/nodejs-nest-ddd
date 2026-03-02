@@ -1,33 +1,35 @@
+import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator'
+import { CryptographyModule } from '@/infra/cryptography/cryptography.module'
+import { DatabaseModule } from '@/infra/database/database.module'
 import { type INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
-import { hash } from 'bcryptjs'
+import { StudentFactory } from '@test/factories/make-student'
 import request from 'supertest'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 describe('Authenticate (E2E)', () => {
 	let app: INestApplication
-	let prisma: PrismaService
+	let studentFactory: StudentFactory
+	let hasher: HashGenerator
 
 	beforeAll(async () => {
-		const { AppModule } = await import('@/app.module.js')
+		const { AppModule } = await import('@/infra/app.module.js')
 
 		const moduleRef = await Test.createTestingModule({
-			imports: [AppModule],
+			imports: [AppModule, DatabaseModule, CryptographyModule],
+			providers: [StudentFactory],
 		}).compile()
 
 		app = moduleRef.createNestApplication()
-		prisma = moduleRef.get(PrismaService)
+		studentFactory = moduleRef.get(StudentFactory)
+		hasher = moduleRef.get(HashGenerator)
 
 		await app.init()
 	})
 
 	test('[POST] /sessions', async () => {
-		await prisma.user.create({
-			data: {
-				name: 'John Doe',
-				email: 'john.doe@example.com',
-				password: await hash('123456', 8),
-			},
+		await studentFactory.makePrismaStudent({
+			email: 'john.doe@example.com',
+			password: await hasher.hash('123456'),
 		})
 
 		const response = await request(app.getHttpServer()).post('/sessions').send({

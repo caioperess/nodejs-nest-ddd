@@ -1,14 +1,14 @@
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { type INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 describe('CreateAccount (E2E)', () => {
 	let app: INestApplication
 	let prisma: PrismaService
 
 	beforeAll(async () => {
-		const { AppModule } = await import('@/app.module.js')
+		const { AppModule } = await import('@/infra/app.module.js')
 
 		const moduleRef = await Test.createTestingModule({
 			imports: [AppModule],
