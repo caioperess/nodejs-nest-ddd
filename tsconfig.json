@@ -30,6 +30,6 @@
 			"@test/*": ["./test/*"]
 		},
 
-		"types": ["vitest/globals"]
+		"types": ["vitest/globals", "multer"]
 	}
 }

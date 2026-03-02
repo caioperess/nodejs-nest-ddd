@@ -10,14 +10,17 @@ import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/dele
 import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cases/delete-question-comment'
 import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer'
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question'
+import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments'
 import { FetchQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/fetch-question-answers'
 import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-question-comments'
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions'
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug'
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student'
+import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment'
 import { Module } from '@nestjs/common'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
+import { StorageModule } from '../storage/storage.module'
 import { AnswerQuestionController } from './controllers/answer-question.controller'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer.controller'
@@ -31,15 +34,15 @@ import { DeleteQuestionCommentController } from './controllers/delete-question-c
 import { DeleteQuestionController } from './controllers/delete-question.controller'
 import { EditAnswerController } from './controllers/edit-answer.controller'
 import { EditQuestionController } from './controllers/edit-question.controller'
+import { FetchAnswerCommentsController } from './controllers/fetch-answer-comments.controller'
 import { FetchQuestionAnswersController } from './controllers/fetch-question-answer.controller'
 import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller'
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller'
-import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments'
-import { FetchAnswerCommentsController } from './controllers/fetch-answer-comments.controller'
+import { UploadAttachmentController } from './controllers/upload-attachment.controller'
 
 @Module({
-	imports: [DatabaseModule, CryptographyModule],
+	imports: [DatabaseModule, CryptographyModule, StorageModule],
 	controllers: [
 		CreateAccountController,
 		AuthenticateController,
@@ -59,6 +62,7 @@ import { FetchAnswerCommentsController } from './controllers/fetch-answer-commen
 		DeleteAnswerCommentController,
 		FetchQuestionCommentsController,
 		FetchAnswerCommentsController,
+		UploadAttachmentController,
 	],
 	providers: [
 		CreateQuestionUseCase,
@@ -79,6 +83,7 @@ import { FetchAnswerCommentsController } from './controllers/fetch-answer-commen
 		DeleteAnswerCommentUseCase,
 		FetchQuestionCommentsUseCase,
 		FetchAnswerCommentsUseCase,
+		UploadAndCreateAttachmentUseCase,
 	],
 })
 export class HttpModule {}
