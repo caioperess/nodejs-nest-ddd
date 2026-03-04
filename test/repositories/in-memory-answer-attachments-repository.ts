@@ -4,6 +4,14 @@ import type { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer
 export class InMemoryAnswersAttachmentsRepository implements AnswerAttachmentsRepository {
 	public items: AnswerAttachment[] = []
 
+	async createMany(answerAttachments: AnswerAttachment[]): Promise<void> {
+		this.items.push(...answerAttachments)
+	}
+
+	async deleteMany(answerAttachments: AnswerAttachment[]): Promise<void> {
+		this.items = this.items.filter((item) => !answerAttachments.some((attachment) => attachment.equals(item)))
+	}
+
 	async findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]> {
 		return this.items.filter((item) => item.answerId.toString() === answerId)
 	}

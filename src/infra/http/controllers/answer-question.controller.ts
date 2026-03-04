@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 const answerQuestionBodySchema = z.object({
 	content: z.string(),
+	attachments: z.array(z.uuid()),
 })
 
 type AnswerQuestionBodySchema = z.infer<typeof answerQuestionBodySchema>
@@ -22,14 +23,14 @@ export class AnswerQuestionController {
 		@Body(new ZodValidationPipe(answerQuestionBodySchema)) body: AnswerQuestionBodySchema,
 		@Param('questionId') questionId: string,
 	) {
-		const { content } = body
+		const { content, attachments } = body
 		const userId = user.sub
 
 		const result = await this.answerQuestion.execute({
 			questionId,
 			authorId: userId,
 			content,
-			attachmentsIds: [],
+			attachmentsIds: attachments,
 		})
 
 		if (result.isLeft()) {

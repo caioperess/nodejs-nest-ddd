@@ -1,11 +1,10 @@
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { makeAnswer } from '@test/factories/make-answer'
 import { makeAnswerAttachment } from '@test/factories/make-answer-attachment'
 import { InMemoryAnswersAttachmentsRepository } from '@test/repositories/in-memory-answer-attachments-repository'
 import { InMemoryAnswersRepository } from '@test/repositories/in-memory-answers-repository'
-import { expect } from 'node_modules/vitest/dist'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { NotAllowedError } from '@/core/errors/not-allowed-error'
-import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EditAnswerUseCase } from './edit-answer'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository

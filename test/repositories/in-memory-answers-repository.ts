@@ -7,16 +7,21 @@ import type { InMemoryAnswersAttachmentsRepository } from './in-memory-answer-at
 export class InMemoryAnswersRepository implements AnswersRepository {
 	public items: Answer[] = []
 
-	constructor(private answerAttachmentsRepository?: InMemoryAnswersAttachmentsRepository) {}
+	constructor(private readonly answerAttachmentsRepository?: InMemoryAnswersAttachmentsRepository) {}
 
 	async create(answer: Answer): Promise<void> {
 		this.items.push(answer)
+		this.answerAttachmentsRepository?.createMany(answer.attachments.getItems())
+
 		DomainEvents.dispatchEventsForAggregate(answer.id)
 	}
 
 	async save(answer: Answer): Promise<void> {
 		const index = this.items.indexOf(answer)
 		this.items[index] = answer
+
+		this.answerAttachmentsRepository?.createMany(answer.attachments.getNewItems())
+		this.answerAttachmentsRepository?.deleteMany(answer.attachments.getRemovedItems())
 
 		DomainEvents.dispatchEventsForAggregate(answer.id)
 	}
