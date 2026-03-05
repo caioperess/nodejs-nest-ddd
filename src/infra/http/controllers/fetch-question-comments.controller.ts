@@ -2,7 +2,7 @@ import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cas
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
 import { z } from 'zod'
-import { CommentPresenter } from '../presenters/comment-presenter'
+import { CommentWithAuthorPresenter } from '../presenters/comment-with-author-presenter'
 
 const pageQueryValidationSchema = z.coerce.number().min(1).default(1)
 
@@ -27,6 +27,6 @@ export class FetchQuestionCommentsController {
 
 		const { comments } = result.value
 
-		return { comments: comments.map(CommentPresenter.toHTTP) }
+		return { comments: comments.map(CommentWithAuthorPresenter.toHTTP) }
 	}
 }
