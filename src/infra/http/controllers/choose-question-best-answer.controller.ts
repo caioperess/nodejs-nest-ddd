@@ -1,7 +1,7 @@
+import { BadRequestException, Controller, HttpCode, Param, Patch } from '@nestjs/common'
 import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-cases/choose-question-best-answer'
 import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import type { TokenPayload } from '@/infra/auth/jwt-strategy'
-import { BadRequestException, Controller, HttpCode, Param, Patch } from '@nestjs/common'
 
 @Controller('answers/:answerId/choose-as-best')
 export class ChooseQuestionBestAnswerController {

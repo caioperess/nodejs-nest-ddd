@@ -1,6 +1,6 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryQuestionsAttachmentsRepository } from '@test/repositories/in-memory-questions-attachments-repository'
 import { InMemoryQuestionsRepository } from '@test/repositories/in-memory-questions-repository'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { CreateQuestionUseCase } from './create-question'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository

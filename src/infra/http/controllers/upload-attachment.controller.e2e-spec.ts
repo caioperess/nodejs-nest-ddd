@@ -1,9 +1,9 @@
-import { DatabaseModule } from '@/infra/database/database.module'
 import { type INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
 import { StudentFactory } from '@test/factories/make-student'
 import request from 'supertest'
+import { DatabaseModule } from '@/infra/database/database.module'
 
 describe('Upload Attachment (E2E)', () => {
 	let app: INestApplication

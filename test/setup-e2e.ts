@@ -1,8 +1,8 @@
-import { PrismaClient } from '@/generated/prisma/client'
-import { PrismaPg } from '@prisma/adapter-pg'
-import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { config } from 'dotenv'
+import { PrismaClient } from '@/generated/prisma/client'
 
 config({ path: '.env', override: true })
 config({ path: '.env.test', override: true })

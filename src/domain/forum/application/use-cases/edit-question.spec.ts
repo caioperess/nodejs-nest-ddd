@@ -1,11 +1,11 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { NotAllowedError } from '@/core/errors/not-allowed-error'
-import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { makeQuestion } from '@test/factories/make-question'
 import { makeQuestionAttachment } from '@test/factories/make-question-attachment'
 import { InMemoryQuestionsAttachmentsRepository } from '@test/repositories/in-memory-questions-attachments-repository'
 import { InMemoryQuestionsRepository } from '@test/repositories/in-memory-questions-repository'
 import { expect } from 'node_modules/vitest/dist'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EditQuestionUseCase } from './edit-question'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository

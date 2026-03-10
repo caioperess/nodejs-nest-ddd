@@ -1,7 +1,7 @@
+import { Injectable } from '@nestjs/common'
 import { type Either, left, right } from '@/core/either'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { Injectable } from '@nestjs/common'
 import { AnswersRepository } from '../repositories/answers-repository'
 
 interface DeleteAnswerUseCaseParams {

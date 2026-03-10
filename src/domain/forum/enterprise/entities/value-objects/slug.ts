@@ -21,11 +21,11 @@ export class Slug {
 			.normalize('NFKD')
 			.toLowerCase()
 			.trim()
-			.replace(/\s+/g, '-')
-			.replace(/[^\w-]+/g, '')
-			.replace(/_/g, '-')
-			.replace(/--+/g, '-')
-			.replace(/-$/g, '')
+			.replaceAll(/\s+/g, '-')
+			.replaceAll(/[^\w-]+/g, '')
+			.replaceAll('_', '-')
+			.replaceAll(/--+/g, '-')
+			.replaceAll(/-$/g, '')
 
 		return new Slug(slugText)
 	}

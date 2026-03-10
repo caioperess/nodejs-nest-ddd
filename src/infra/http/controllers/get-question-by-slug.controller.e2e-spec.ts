@@ -1,15 +1,19 @@
-import { DatabaseModule } from '@/infra/database/database.module'
 import { type INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
+import { AttachmentFactory } from '@test/factories/make-attachment'
 import { QuestionFactory } from '@test/factories/make-question'
+import { QuestionAttachmentFactory } from '@test/factories/make-question-attachment'
 import { StudentFactory } from '@test/factories/make-student'
 import request from 'supertest'
+import { DatabaseModule } from '@/infra/database/database.module'
 
 describe('Get Question By Slug (E2E)', () => {
 	let app: INestApplication
 	let studentFactory: StudentFactory
 	let questionFactory: QuestionFactory
+	let attachmentFactory: AttachmentFactory
+	let questionAttachmentFactory: QuestionAttachmentFactory
 	let jwt: JwtService
 
 	beforeAll(async () => {
@@ -17,12 +21,14 @@ describe('Get Question By Slug (E2E)', () => {
 
 		const moduleRef = await Test.createTestingModule({
 			imports: [AppModule, DatabaseModule],
-			providers: [StudentFactory, QuestionFactory],
+			providers: [StudentFactory, QuestionFactory, AttachmentFactory, QuestionAttachmentFactory],
 		}).compile()
 
 		app = moduleRef.createNestApplication()
 		studentFactory = moduleRef.get(StudentFactory)
 		questionFactory = moduleRef.get(QuestionFactory)
+		attachmentFactory = moduleRef.get(AttachmentFactory)
+		questionAttachmentFactory = moduleRef.get(QuestionAttachmentFactory)
 		jwt = moduleRef.get(JwtService)
 
 		await app.init()
@@ -41,6 +47,15 @@ describe('Get Question By Slug (E2E)', () => {
 			authorId: user.id,
 		})
 
+		const attachment = await attachmentFactory.makePrismaAttachment({
+			title: 'Test Attachment',
+		})
+
+		await questionAttachmentFactory.makePrismaQuestionAttachment({
+			questionId: question.id,
+			attachmentId: attachment.id,
+		})
+
 		const response = await request(app.getHttpServer())
 			.get(`/questions/${question.slug.value}`)
 			.set('Authorization', `Bearer ${accessToken}`)
@@ -48,7 +63,11 @@ describe('Get Question By Slug (E2E)', () => {
 
 		expect(response.statusCode).toBe(200)
 		expect(response.body).toEqual({
-			question: expect.objectContaining({ title: question.title }),
+			question: expect.objectContaining({
+				title: question.title,
+				author: user.name,
+				attachments: [expect.objectContaining({ title: attachment.title })],
+			}),
 		})
 	})
 })

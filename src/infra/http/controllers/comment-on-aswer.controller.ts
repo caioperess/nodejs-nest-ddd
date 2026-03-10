@@ -1,9 +1,9 @@
+import { BadRequestException, Body, Controller, HttpCode, Param, Post } from '@nestjs/common'
+import { z } from 'zod'
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer'
 import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import type { TokenPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { BadRequestException, Body, Controller, HttpCode, Param, Post } from '@nestjs/common'
-import { z } from 'zod'
 
 const commentOnAnswerBodySchema = z.object({
 	content: z.string(),

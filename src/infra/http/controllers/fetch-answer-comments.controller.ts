@@ -1,7 +1,7 @@
-import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments'
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
 import { z } from 'zod'
+import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments'
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { CommentWithAuthorPresenter } from '../presenters/comment-with-author-presenter'
 
 const pageQueryValidationSchema = z.coerce.number().min(1).default(1)

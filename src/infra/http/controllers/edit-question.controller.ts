@@ -1,9 +1,9 @@
+import { BadRequestException, Body, Controller, HttpCode, Param, Put } from '@nestjs/common'
+import { z } from 'zod'
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question'
 import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import type { TokenPayload } from '@/infra/auth/jwt-strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { BadRequestException, Body, Controller, HttpCode, Param, Put } from '@nestjs/common'
-import { z } from 'zod'
 
 const editQuestionBodySchema = z.object({
 	title: z.string(),

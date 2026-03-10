@@ -1,4 +1,3 @@
-import { DatabaseModule } from '@/infra/database/database.module'
 import { type INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
@@ -6,6 +5,7 @@ import { QuestionFactory } from '@test/factories/make-question'
 import { QuestionCommentFactory } from '@test/factories/make-question-comment'
 import { StudentFactory } from '@test/factories/make-student'
 import request from 'supertest'
+import { DatabaseModule } from '@/infra/database/database.module'
 
 describe('FetchQuestionComments (E2E)', () => {
 	let app: INestApplication

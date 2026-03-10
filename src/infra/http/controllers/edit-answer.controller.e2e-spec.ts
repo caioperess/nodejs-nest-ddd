@@ -1,5 +1,3 @@
-import { DatabaseModule } from '@/infra/database/database.module'
-import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { type INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
@@ -9,6 +7,8 @@ import { AttachmentFactory } from '@test/factories/make-attachment'
 import { QuestionFactory } from '@test/factories/make-question'
 import { StudentFactory } from '@test/factories/make-student'
 import request from 'supertest'
+import { DatabaseModule } from '@/infra/database/database.module'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 describe('EditAnswer (E2E)', () => {
 	let app: INestApplication

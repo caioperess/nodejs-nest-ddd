@@ -1,4 +1,3 @@
-import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment'
 import {
 	BadRequestException,
 	Controller,
@@ -10,6 +9,7 @@ import {
 	UseInterceptors,
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
+import { UploadAndCreateAttachmentUseCase } from '@/domain/forum/application/use-cases/upload-and-create-attachment'
 
 @Controller('/attachments')
 export class UploadAttachmentController {

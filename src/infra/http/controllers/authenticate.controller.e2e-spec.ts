@@ -1,10 +1,10 @@
-import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator'
-import { CryptographyModule } from '@/infra/cryptography/cryptography.module'
-import { DatabaseModule } from '@/infra/database/database.module'
 import { type INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import { StudentFactory } from '@test/factories/make-student'
 import request from 'supertest'
+import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator'
+import { CryptographyModule } from '@/infra/cryptography/cryptography.module'
+import { DatabaseModule } from '@/infra/database/database.module'
 
 describe('Authenticate (E2E)', () => {
 	let app: INestApplication
