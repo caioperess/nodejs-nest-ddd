@@ -2,6 +2,7 @@ import { execSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { config } from 'dotenv'
+import { DomainEvents } from '@/core/events/domain-events'
 import { PrismaClient } from '@/generated/prisma/client'
 
 config({ path: '.env', override: true })
@@ -31,6 +32,8 @@ beforeAll(async () => {
 	prisma = new PrismaClient({
 		adapter: new PrismaPg({ connectionString: databaseURL }),
 	})
+
+	DomainEvents.shouldRun = false
 
 	execSync('pnpm prisma migrate deploy')
 })
